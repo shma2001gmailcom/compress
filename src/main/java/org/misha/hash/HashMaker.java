@@ -20,7 +20,7 @@ public abstract class HashMaker {
     
     private Map<Character, Range> hash() {
         final Map<Character, Range> result = new HashMap<>();
-        for (Character c = (char)0; c < Character.MAX_VALUE; c++) {
+        for (Character c = (char) 0; c < Character.MAX_VALUE; c++) {
             result.put(c, applyRule(c));
         }
         return result;
@@ -29,7 +29,7 @@ public abstract class HashMaker {
     private char getCharByHash(final long hash) {
         if (hash < ranges.min().getLower() || hash >= ranges.max().getUpper())
             throw new IllegalArgumentException("out of bounds");
-        for (final Map.Entry<Character, Range> e: hashes.entrySet()) {
+        for (final Map.Entry<Character, Range> e : hashes.entrySet()) {
             if (e.getValue().contains(hash)) return e.getKey();
         }
         throw new IllegalStateException(hash + " out of range");
@@ -40,7 +40,7 @@ public abstract class HashMaker {
     public String encode(String text) {
         StringBuilder sb = new StringBuilder();
         for (Character c : text.toCharArray()) {
-            sb = sb.append((hashes.get(c).getLower() + hashes.get(c).getUpper() - 1)/2).append(SPACE);
+            sb = sb.append((hashes.get(c).getLower() + hashes.get(c).getUpper() - 1) / 2).append(SPACE);
         }
         return sb.toString();
     }
@@ -49,7 +49,7 @@ public abstract class HashMaker {
         StringBuilder sb = new StringBuilder();
         String[] parts = text.split(SPACE);
         for (String part : parts) {
-           sb.append(getCharByHash(Long.parseLong(part)));
+            sb.append(getCharByHash(Long.parseLong(part)));
         }
         return sb.toString();
     }
