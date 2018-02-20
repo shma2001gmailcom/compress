@@ -14,7 +14,7 @@ import java.util.TreeSet;
  */
 public class Test {
     
-    private static final String TEXT = "唐诗十五首\n" +
+    private static final String LI_BO = "唐诗十五首\n" +
             "李白\n" +
             "\n" +
             "静夜思\n" +
@@ -135,7 +135,7 @@ public class Test {
             "长风破浪会有时，直挂云帆济沧海。";
     
     public static void main(String... args) {
-        Encoder encoder = new Encoder(TEXT);
+        Encoder encoder = new Encoder(LI_BO);
         Decoder decoder = new Decoder(encoder.encode()) {
             
             @Override
@@ -162,7 +162,7 @@ public class Test {
             }
         };
         //System.out.println(hashMaker.toString());
-        System.out.println(hashMaker.encode(TEXT));
-        System.out.println(hashMaker.decode(hashMaker.encode(TEXT)));
+        System.out.println(hashMaker.encode(LI_BO));
+        System.out.println(hashMaker.decode(hashMaker.encode(LI_BO)));
     }
 }
