@@ -1,8 +1,11 @@
 package org.misha.hash;
 
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.SortedSet;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * author: misha
@@ -12,16 +15,14 @@ public class Ranges implements Iterable<Range> {
     private final SortedSet<Range> raw;
     
     public Ranges(final SortedSet<Range> raw) {
+        checkArgument(raw != null);
         this.raw = raw;
     }
     
     @Override
+    @Nonnull
     public Iterator<Range> iterator() {
         return raw.iterator();
-    }
-    
-    void add(final Range range) {
-        raw.add(range);
     }
     
     Range min() {

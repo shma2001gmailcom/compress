@@ -1,5 +1,6 @@
 package org.misha;
 
+import org.apache.log4j.Logger;
 import org.misha.hash.HashMaker;
 import org.misha.hash.Range;
 import org.misha.hash.Ranges;
@@ -8,12 +9,14 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeSet;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * author: misha
  * date: 2/20/18
  */
 public class Test {
-    
+    private static final Logger log = Logger.getLogger(Test.class);
     private static final String LI_BO = "唐诗十五首\n" +
             "李白\n" +
             "\n" +
@@ -139,12 +142,12 @@ public class Test {
         Decoder decoder = new Decoder(encoder.encode()) {
             
             @Override
-            char beforeInsert(final char c, final int position) {
+            protected char beforeInsert(final char c, final int position) {
                 return c; //can cipher here
             }
         };
-        System.out.println(decoder.decode(encoder.size()));
-        TreeSet<Range> raw = new TreeSet<>();
+        log.error('\n' + decoder.decode(encoder.size()));
+        final TreeSet<Range> raw = new TreeSet<>();
         long lastRight = 0;
         for (char c = 0; c < Character.MAX_VALUE; ++c) {
             int i = new Random().nextInt(50000);
@@ -154,15 +157,15 @@ public class Test {
         }
         final Ranges ranges = new Ranges(raw);
         final Iterator<Range> it = ranges.iterator();
-        HashMaker hashMaker = new HashMaker(ranges) {
+        HashMaker hashMaker = new HashMaker(ranges, LI_BO) {
             
             @Override
             protected Range applyRule(final Character c) {
+                checkArgument(it.hasNext(), "iterator has ended unexpectedly");
                 return it.next();
             }
         };
-        //System.out.println(hashMaker.toString());
-        System.out.println(hashMaker.encode(LI_BO));
-        System.out.println(hashMaker.decode(hashMaker.encode(LI_BO)));
+        log.debug("\n  " + hashMaker.encode(LI_BO));
+        log.debug('\n' + hashMaker.decode(hashMaker.encode(LI_BO)));
     }
 }

@@ -17,13 +17,21 @@ public abstract class Decoder {
     
     String decode(final int size) {
         final char[] result = new char[size];
-        for (Map.Entry<Character, List<Integer>> e : compressed.entrySet()) {
-            for (int pos : e.getValue()) {
+        for (Map.Entry<Character, List<Integer>> e : compressed.entrySet())
+            for (int pos : e.getValue())
                 result[pos] = beforeInsert(e.getKey(), pos);
-            }
-        }
         return new String(result);
     }
     
-    abstract char beforeInsert(final char c, final int position);
+    /**
+     * do something with 'c' and 'position' before
+     * decompress char 'c' into place 'position'
+     *
+     * @param c        char
+     * @param position where 'c' should be placed
+     * @return another char
+     */
+    protected char beforeInsert(final char c, final int position) {
+        return c;
+    }
 }
