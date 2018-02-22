@@ -143,7 +143,7 @@ public class Test {
             
             @Override
             protected char beforeInsert(final char c, final int position) {
-                return c; //can cipher here
+                return c; //can cipher or something here
             }
         };
         log.error('\n' + decoder.decode(encoder.size()));
