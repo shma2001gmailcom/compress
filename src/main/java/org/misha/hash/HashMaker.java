@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  * date: 2/20/18
  */
 public abstract class HashMaker {
-    private static final String SPACE = " ";
+    private static final String ENCODED_TEXT_WORD_DELIMITER = " ";
     private final Ranges ranges;
     private final Map<Character, Range> hashes;
     
@@ -50,14 +50,14 @@ public abstract class HashMaker {
         checkArgument(StringUtils.isNotEmpty(text));
         final StringBuilder sb = new StringBuilder();
         for (final Character c : text.toCharArray())
-            sb.append(hashes.get(c).getRandom()).append(SPACE);
+            sb.append(hashes.get(c).getRandom()).append(ENCODED_TEXT_WORD_DELIMITER);
         return sb.toString();
     }
     
     public String decode(final String text) {
         checkArgument(StringUtils.isNotEmpty(text));
         final StringBuilder sb = new StringBuilder();
-        String[] parts = text.split(SPACE);
+        String[] parts = text.split(ENCODED_TEXT_WORD_DELIMITER);
         for (String part : parts)
             sb.append(getCharByHash(Long.parseLong(part)));
         return sb.toString();
