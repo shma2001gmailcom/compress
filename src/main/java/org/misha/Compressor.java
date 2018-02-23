@@ -12,15 +12,15 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  * author: misha
  * date: 2/20/18
  */
-public class Encoder {
+class Compressor {
     private final String text;
     
-    Encoder(final String text) {
+    Compressor(final String text) {
         checkArgument(isNotEmpty(text));
         this.text = text;
     }
     
-    Map<Character, List<Integer>> encode() {
+    Map<Character, List<Integer>> compress() {
         final char[] chars = text.toCharArray();
         final Map<Character, List<Integer>> result = new HashMap<>();
         for (int position = 0; position < chars.length; ++position) {

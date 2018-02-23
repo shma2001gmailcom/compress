@@ -20,7 +20,7 @@ public class Alphabet implements Iterable<Character> {
         this.characters = new TreeSet<>();
     }
     
-    public static Alphabet alphabet(final String text) {
+    static Alphabet alphabet(final String text) {
         checkArgument(StringUtils.isNotEmpty(text), "text is empty");
         final Alphabet result = new Alphabet();
         for (final char c : text.toCharArray()) result.characters.add(c);
