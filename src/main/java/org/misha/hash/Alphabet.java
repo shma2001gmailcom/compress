@@ -15,18 +15,20 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class Alphabet implements Iterable<Character> {
     private final Set<Character> characters;
-    
+
     private Alphabet() {
         this.characters = new TreeSet<>();
     }
-    
+
     static Alphabet alphabet(final String text) {
         checkArgument(StringUtils.isNotEmpty(text), "text is empty");
         final Alphabet result = new Alphabet();
-        for (final char c : text.toCharArray()) result.characters.add(c);
+        for (final char c : text.toCharArray()) {
+            result.characters.add(c);
+        }
         return result;
     }
-    
+
     @Override
     @Nonnull
     public Iterator<Character> iterator() {

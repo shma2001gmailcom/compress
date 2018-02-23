@@ -10,6 +10,7 @@ import org.junit.Test;
  */
 public class RangeTest {
     private static final Logger log = Logger.getLogger(org.misha.Test.class);
+
     @Test
     public void getRandom() throws Exception {
         Range range = new Range(1111111L, 77777777L);

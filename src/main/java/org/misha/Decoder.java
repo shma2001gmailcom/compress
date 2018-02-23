@@ -8,21 +8,23 @@ import java.util.Map;
  * date: 2/20/18
  */
 
-public abstract class Decoder {
+public class Decoder {
     private final Map<Character, List<Integer>> compressed;
-    
+
     Decoder(final Map<Character, List<Integer>> compressed) {
         this.compressed = compressed;
     }
-    
+
     String decode(final int size) {
         final char[] result = new char[size];
-        for (Map.Entry<Character, List<Integer>> e : compressed.entrySet())
-            for (int pos : e.getValue())
+        for (Map.Entry<Character, List<Integer>> e : compressed.entrySet()) {
+            for (int pos : e.getValue()) {
                 result[pos] = beforeInsert(e.getKey(), pos);
+            }
+        }
         return new String(result);
     }
-    
+
     /**
      * do something with 'c' and 'position' before
      * decompress char 'c' into place 'position'

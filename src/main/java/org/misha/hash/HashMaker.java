@@ -38,8 +38,7 @@ public class HashMaker {
     }
 
     private char getCharByHash(final long reverseHash) {
-        final boolean preCondition = ranges.min().getLower() <= reverseHash
-                && reverseHash < ranges.max().getUpper();
+        final boolean preCondition = ranges.min().getLower() <= reverseHash && reverseHash < ranges.max().getUpper();
         checkArgument(preCondition, "out of bounds");
         for (final Map.Entry<Character, Range> e : hashes.entrySet()) {
             if (e.getValue().contains(reverseHash)) {

@@ -8,6 +8,8 @@ import org.misha.hash.Ranges;
 import java.security.SecureRandom;
 import java.util.TreeSet;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * author: misha
  * date: 2/20/18
@@ -15,11 +17,12 @@ import java.util.TreeSet;
 public class Test {
     private static final Logger log = Logger.getLogger(Test.class);
     private static final String LI_BO = "аааа \n ааааааааааааааааааааааааааааааааааааааааааааааааааа.";
-    
-    public static void main(String... args) {
+
+    @org.junit.Test
+    public void main() {
         Compressor encoder = new Compressor(LI_BO);
         Decoder decoder = new Decoder(encoder.compress()) {
-            
+
             @Override
             protected char beforeInsert(final char c, final int position) {
                 return c; //can cipher or something here
@@ -35,7 +38,6 @@ public class Test {
         }
         final Ranges ranges = new Ranges(raw);
         HashMaker hashMaker = new HashMaker(ranges, LI_BO);
-        log.debug("\n  " + hashMaker.encode(LI_BO));
-        log.debug('\n' + hashMaker.decode(hashMaker.encode(LI_BO)));
+        assertEquals(hashMaker.decode(hashMaker.encode(LI_BO)), LI_BO);
     }
 }
