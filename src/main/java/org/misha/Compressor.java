@@ -14,15 +14,16 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
  */
 class Compressor {
     private final String text;
-
+    private Map<Character, List<Integer>> result;
+    
     Compressor(final String text) {
         checkArgument(isNotEmpty(text));
+        result = new HashMap<>();
         this.text = text;
     }
 
     Map<Character, List<Integer>> compress() {
         final char[] chars = text.toCharArray();
-        final Map<Character, List<Integer>> result = new HashMap<>();
         for (int position = 0; position < chars.length; ++position) {
             final char c = chars[position];
             if (!result.containsKey(c)) {
@@ -35,6 +36,19 @@ class Compressor {
 
     int size() {
         return text.length();
+    }
+    
+    String compressed() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('\n');
+        for (final Map.Entry<Character, List<Integer>> e : result.entrySet()) {
+           sb.append(e.getKey()).append(' ');
+           for (final int i : e.getValue()) {
+               sb.append(i).append(' ');
+           }
+           sb.append('\n');
+        }
+        return sb.toString();
     }
 }
 

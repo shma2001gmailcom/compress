@@ -15,12 +15,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class CompressorTest {
     private static final Logger log = Logger.getLogger(CompressorTest.class);
-    private static final String TEXT_TO_COMPRESS = "text to compress";
+    private static final String TEXT_TO_COMPRESS = "\uD83D\uDD4Etext to compress.\uD83D\uDD4E";
 
     @Test
-    public void testCompress() throws Exception {
-        Compressor compressor = new Compressor(TEXT_TO_COMPRESS);
-        Map<Character, List<Integer>> compressed = compressor.compress();
+    public void testCompress() {
+        final Compressor compressor = new Compressor(TEXT_TO_COMPRESS);
+        final Map<Character, List<Integer>> compressed = compressor.compress();
+        log.debug(TEXT_TO_COMPRESS);
+        log.debug(compressor.compressed());
         log.debug(compressed);
         assertEquals(TEXT_TO_COMPRESS, new Decoder(compressed).decode(TEXT_TO_COMPRESS.length()));
     }

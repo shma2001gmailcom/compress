@@ -1,10 +1,13 @@
 package org.misha;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.misha.hash.HashMaker;
 import org.misha.hash.Range;
 import org.misha.hash.Ranges;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.TreeSet;
 
@@ -16,8 +19,16 @@ import static org.junit.Assert.assertEquals;
  */
 public class Test {
     private static final Logger log = Logger.getLogger(Test.class);
-    private static final String LI_BO = "аааа \n ааааааааааааааааааааааааааааааааааааааааааааааааааа.";
-
+    private static final String LI_BO = readLiBo();
+    
+    private static String readLiBo() {
+        try {
+            return FileUtils.readFileToString(new File("src/test/resources/Li-Bo.txt"));
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+            return e.getMessage();
+        }
+    }
     @org.junit.Test
     public void main() {
         Compressor encoder = new Compressor(LI_BO);
