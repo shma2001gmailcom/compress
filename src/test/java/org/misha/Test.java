@@ -2,6 +2,7 @@ package org.misha;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.misha.hash.HashMaker;
 import org.misha.hash.Range;
 import org.misha.hash.Ranges;
@@ -29,8 +30,9 @@ public class Test {
             return e.getMessage();
         }
     }
+    
     @org.junit.Test
-    public void main() {
+    public void main() throws ClassNotFoundException {
         Compressor encoder = new Compressor(LI_BO);
         Decoder decoder = new Decoder(encoder.compress()) {
 
@@ -49,6 +51,6 @@ public class Test {
         }
         final Ranges ranges = new Ranges(raw);
         HashMaker hashMaker = new HashMaker(ranges, LI_BO);
-        assertEquals(hashMaker.decode(hashMaker.encode(LI_BO)), LI_BO);
+        assertEquals(LI_BO, hashMaker.decode(hashMaker.encode(LI_BO)));
     }
 }

@@ -1,6 +1,7 @@
 package org.misha;
 
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CompressorTest {
     private static final String TEXT_TO_COMPRESS = "\uD83D\uDD4Etext to compress.\uD83D\uDD4E";
 
     @Test
-    public void testCompress() {
+    public void testCompress() throws ClassNotFoundException {
         final Compressor compressor = new Compressor(TEXT_TO_COMPRESS);
         final Map<Character, List<Integer>> compressed = compressor.compress();
         log.debug(TEXT_TO_COMPRESS);

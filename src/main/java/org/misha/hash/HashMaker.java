@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.misha.Launcher.SEPARATOR;
 
 /**
  * author: misha
@@ -16,7 +17,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class HashMaker {
     private static final Logger log = Logger.getLogger(HashMaker.class);
-    private static final String ENCODED_TEXT_WORD_DELIMITER = " ";
     private final Ranges ranges;
     private final Map<Character, Range> hashes;
 
@@ -52,7 +52,7 @@ public class HashMaker {
         checkArgument(StringUtils.isNotEmpty(text));
         final StringBuilder sb = new StringBuilder();
         for (final Character c : text.toCharArray()) {
-            sb.append(hashes.get(c).getRandom()).append(ENCODED_TEXT_WORD_DELIMITER);
+            sb.append(hashes.get(c).getRandom()).append(SEPARATOR);
         }
         return sb.toString();
     }
@@ -60,7 +60,7 @@ public class HashMaker {
     public String decode(final String text) {
         checkArgument(StringUtils.isNotEmpty(text));
         final StringBuilder sb = new StringBuilder();
-        String[] parts = text.split(ENCODED_TEXT_WORD_DELIMITER);
+        String[] parts = text.split(SEPARATOR);
         for (final String part : parts) {
             sb.append(getCharByHash(Long.parseLong(part)));
         }

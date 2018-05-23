@@ -27,7 +27,7 @@ class Compressor {
         for (int position = 0; position < chars.length; ++position) {
             final char c = chars[position];
             if (!result.containsKey(c)) {
-                result.put(c, new ArrayList<Integer>());
+                result.put(c, new ArrayList<>());
             }
             result.get(c).add(position);
         }
@@ -39,7 +39,7 @@ class Compressor {
     }
     
     String compressed() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append('\n');
         for (final Map.Entry<Character, List<Integer>> e : result.entrySet()) {
            sb.append(e.getKey()).append(' ');
