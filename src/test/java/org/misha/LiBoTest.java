@@ -2,7 +2,7 @@ package org.misha;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.misha.hash.HashMaker;
 import org.misha.hash.Range;
 import org.misha.hash.Ranges;
@@ -18,8 +18,8 @@ import static org.junit.Assert.assertEquals;
  * author: misha
  * date: 2/20/18
  */
-public class Test {
-    private static final Logger log = Logger.getLogger(Test.class);
+public class LiBoTest {
+    private static final Logger log = Logger.getLogger(LiBoTest.class);
     private static final String LI_BO = readLiBo();
     
     private static String readLiBo() {
@@ -31,8 +31,8 @@ public class Test {
         }
     }
     
-    @org.junit.Test
-    public void main() throws ClassNotFoundException {
+    @Test
+    public void main(){
         Compressor encoder = new Compressor(LI_BO);
         Decoder decoder = new Decoder(encoder.compress()) {
 

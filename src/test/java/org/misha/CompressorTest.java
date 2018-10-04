@@ -19,7 +19,7 @@ public class CompressorTest {
     private static final String TEXT_TO_COMPRESS = "\uD83D\uDD4Etext to compress.\uD83D\uDD4E";
 
     @Test
-    public void testCompress() throws ClassNotFoundException {
+    public void testCompress() {
         final Compressor compressor = new Compressor(TEXT_TO_COMPRESS);
         final Map<Character, List<Integer>> compressed = compressor.compress();
         log.debug(TEXT_TO_COMPRESS);

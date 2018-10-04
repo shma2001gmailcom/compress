@@ -2,6 +2,7 @@ package org.misha.hash;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.misha.LiBoTest;
 
 /**
  * author: misha
@@ -9,7 +10,7 @@ import org.junit.Test;
  * time: 6:45 PM
  */
 public class RangeTest {
-    private static final Logger log = Logger.getLogger(org.misha.Test.class);
+    private static final Logger log = Logger.getLogger(LiBoTest.class);
 
     @Test
     public void getRandom() throws Exception {

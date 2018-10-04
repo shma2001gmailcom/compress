@@ -3,6 +3,7 @@ package org.misha.hash;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,7 +18,7 @@ public class Alphabet implements Iterable<Character> {
     private final Set<Character> characters;
 
     private Alphabet() {
-        this.characters = new TreeSet<>();
+        this.characters = new HashSet<>();
     }
 
     static Alphabet alphabet(final String text) {

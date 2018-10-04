@@ -10,10 +10,12 @@ import java.security.SecureRandom;
 public class Range implements Comparable<Range> {
     private final long lower;
     private final long upper;
+    private final int hashCode;
 
     public Range(final long left, final long right) {
-        this.lower = left;
-        this.upper = right;
+        lower = left;
+        upper = right;
+        hashCode = 31 * (int) (lower ^ (lower >>> 32)) + (int) (upper ^ (upper >>> 32));
     }
 
     long getLower() {
@@ -43,13 +45,11 @@ public class Range implements Comparable<Range> {
 
     @Override
     public int hashCode() {
-        int result = (int) (lower ^ (lower >>> 32));
-        result = 31 * result + (int) (upper ^ (upper >>> 32));
-        return result;
+        return hashCode;
     }
 
-    boolean contains(final long l) {
-        return lower <= l && l < upper;
+    boolean contains(final long value) {
+        return lower <= value && value < upper;
     }
 
     long getRandom() {
